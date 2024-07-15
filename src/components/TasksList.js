@@ -1,10 +1,10 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import MyVerticallyCenteredModal from './UpdateTask';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { removeTaskFromList, setSelectedTask } from "../slices/taskSlice";
+import { getTasksFromServer, removeTaskFromList, setSelectedTask } from "../slices/taskSlice";
 
 const TasksList = () => {
 
@@ -20,6 +20,9 @@ const TasksList = () => {
     console.log("delete task");
     dispatch(removeTaskFromList(task))
   };
+  useEffect(()=>{
+    dispatch(getTasksFromServer())
+  },[dispatch])
 
   const [modalShow,setModalShow] = useState(false)
   return (
